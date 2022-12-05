@@ -16,7 +16,7 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar color='BurntOrange'>
+        <AppBar color='BurntOrange' >
             <Container maxWidth='xl' >
                 <Toolbar disableGutters>
                     <Typography variant='h4' component='p' fontFamily='Galey' fontWeight={900} color='white' >BlogChi</Typography>
