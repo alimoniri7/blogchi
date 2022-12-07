@@ -6,9 +6,9 @@ import {red} from '@mui/material/colors'
 import solarDateConvertor from '../../tools/solarDateConverter';
 import dateSeprator from '../../tools/dateSeprator';
 
-const PreviewCard = ({author, title, cover, updateAt}) => {
+const PreviewCard = ({author, title, cover, updatedAt}) => {
 
-
+    console.log(updatedAt);
     return (
         <Card sx={{maxWidth : '350px', boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
             <CardHeader
@@ -24,7 +24,7 @@ const PreviewCard = ({author, title, cover, updateAt}) => {
                       <MoreVertIcon />
                     </IconButton>
                 }
-                subheader={dateSeprator(updateAt)}
+                subheader={solarDateConvertor(...dateSeprator(updatedAt))}
                 
             />
             <CardMedia

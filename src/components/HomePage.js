@@ -6,14 +6,11 @@ import { GET_CARD_INFO } from './../services/GraphQL/gqls';
 import LoadinCard from './shared/LoadinCard';
 import { Container } from '@mui/system';
 import { Alert, AlertTitle, Grid } from '@mui/material';
-import dateSeprator from '../tools/dateSeprator';
 
 const HomePage = () => {
 
-    // const {loading , }
     const {loading , data, error}= useQuery(GET_CARD_INFO)
     console.log({loading, data});
-    if(!loading) dateSeprator(data.posts[0].updatedAt)
 
     return (
         <Layout>
@@ -36,7 +33,7 @@ const HomePage = () => {
                                 <Grid container spacing={3}>
                                     {data.posts.map(post=> 
                                         <Grid item xs={4} key={post.id} >
-                                            <PreviewCard author={post.author} title={post.title} cover={post.cover} updateAt={post.updateAt} />
+                                            <PreviewCard author={post.author} title={post.title} cover={post.cover} updatedAt={post.updatedAt} />
                                         </Grid>
                                     )}
                                 </Grid>
