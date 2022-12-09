@@ -2,20 +2,23 @@ import React from 'react';
 import PreviewCard from './shared/PreviewCard';
 import Layout from './layout';
 import { useQuery } from '@apollo/client';
-import { GET_CARD_INFO } from './../services/GraphQL/gqls';
+import { GET_AUTHOR_PREVIEW, GET_CARD_INFO } from './../services/GraphQL/gqls';
 import LoadinCard from './shared/LoadinCard';
 import { Container } from '@mui/system';
-import { Alert, AlertTitle, Grid } from '@mui/material';
+import { Alert, AlertTitle, Divider, Grid, List, ListSubheader, Typography } from '@mui/material';
+import AuthorItem from './shared/AuthorItem';
+import AuthorItemLoading from './shared/AuthorItemLoading';
 
 const HomePage = () => {
 
     const {loading , data, error}= useQuery(GET_CARD_INFO)
+    const authorsRes = useQuery(GET_AUTHOR_PREVIEW)
     console.log({loading, data});
 
     return (
         <Layout>
             <Container maxWidth='xl' sx={{marginTop:'100px'}}>
-                <Grid container spacing={1}>
+                <Grid container spacing={3}>
                     {error?
                         <Alert severity="error"  >
                             <AlertTitle>خطا!</AlertTitle>
@@ -23,16 +26,55 @@ const HomePage = () => {
                         </Alert>
                     :
                         <>
-                            <Grid item xs={3}>
-
+                            <Grid item xs={12} md={3} >
+                                {authorsRes.error?
+                                    <Alert severity="error"  >
+                                        <AlertTitle>خطا!</AlertTitle>
+                                        {error.message}
+                                    </Alert>
+                                :
+                                    <List sx={{borderRadius: '10px', boxShadow:'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}}       
+                                        subheader={
+                                            <>
+                                                <ListSubheader component="div" id="nested-list-subheader">
+                                                    نویسنده ها
+                                                </ListSubheader>
+                                                <Divider/>  
+                                            </>
+                                        }
+                                    >
+                                        {authorsRes.loading?
+                                            <>
+                                             {[0,1,2,3].map(item=> <AuthorItemLoading key={item}/>) }
+                                            </>
+                                        :
+                                            <>
+                                                {authorsRes.data.authors.map((post, index)=>
+                                                    <>
+                                                        <AuthorItem name={post.name} avatarURL={post.avatar.url}/>
+                                                        {
+                                                            index!== authorsRes.data.authors.length-1 && <Divider variant='middle' />
+                                                        }
+                                                    </>
+                                                )}
+                                            </>
+                                        } 
+                                    </List>                                   
+                                }
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item xs={12} md={9}>
                                 {loading?
-                                    <LoadinCard/>
+                                    <Grid container  spacing={3}>
+                                        {[0,1,2,3,4,5].map(item=> <Grid item xs={12} lg={4} sm={6} key={item}><LoadinCard/></Grid>)}
+                                    </Grid>
                                 :
                                 <Grid container spacing={3}>
+                                    <Grid item xs={12} >
+                                        <Typography variant='h5' component='h3' mr={2} pb={1} >پست ها</Typography>
+                                        <Divider variant='inset' />
+                                    </Grid>
                                     {data.posts.map(post=> 
-                                        <Grid item xs={4} key={post.id} >
+                                        <Grid item  xs={12} lg={4} sm={6} key={post.id} >
                                             <PreviewCard author={post.author} title={post.title} cover={post.cover} updatedAt={post.updatedAt} />
                                         </Grid>
                                     )}
@@ -43,9 +85,9 @@ const HomePage = () => {
                     }
                 </Grid>
             </Container>
-            
         </Layout>
     );
 };
 
 export default HomePage;
+
