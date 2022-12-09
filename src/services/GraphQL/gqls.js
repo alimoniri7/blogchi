@@ -20,4 +20,17 @@ const GET_CARD_INFO = gql`
     }
 `
 
-export { GET_CARD_INFO }
+const GET_AUTHOR_PREVIEW = gql`
+    query MyQuery {
+    authors {
+        slug
+        name
+        avatar {
+        url
+        }
+        profession
+    }
+}
+`
+
+export { GET_CARD_INFO, GET_AUTHOR_PREVIEW }

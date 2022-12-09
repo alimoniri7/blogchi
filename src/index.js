@@ -10,7 +10,7 @@ import './Assets/fonts/fontFaces.css'
 
 
 const client = new ApolloClient({
-    uri: 'https://api-us-east-1.hygraph.com/v2/clb4nsf6o0a6c01ui8xjqgg4l/master',
+    uri: process.env.REACT_APP_GRAPHCMS_URI ,
     cache: new InMemoryCache()
 })
 

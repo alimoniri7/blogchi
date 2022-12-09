@@ -10,7 +10,7 @@ const PreviewCard = ({author, title, cover, updatedAt}) => {
 
     console.log(updatedAt);
     return (
-        <Card sx={{maxWidth : '350px', boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
+        <Card sx={{maxWidth : '600px', borderRadius: '10px', boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
             <CardHeader
                 avatar={
                     cover.url?
