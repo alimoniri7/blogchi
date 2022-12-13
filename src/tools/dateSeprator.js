@@ -1,5 +1,5 @@
 const dateSeprator= (stringDate, temp ,temp1)=>{
-    console.log(stringDate);
+
     let dateStr = stringDate.replaceAll('T' , '-').replaceAll('.' , '-').split('-')
     temp = dateStr.pop()
     temp1 = dateStr.pop()

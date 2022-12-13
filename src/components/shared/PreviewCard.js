@@ -5,10 +5,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {red} from '@mui/material/colors'
 import solarDateConvertor from '../../tools/solarDateConverter';
 import dateSeprator from '../../tools/dateSeprator';
+import { useNavigate } from 'react-router-dom';
 
-const PreviewCard = ({author, title, cover, updatedAt}) => {
+const PreviewCard = ({author, title, cover, updatedAt, slug}) => {
+    const navigate= useNavigate()
 
-    console.log(updatedAt);
     return (
         <Card sx={{maxWidth : '600px', borderRadius: '10px', boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
             <CardHeader
@@ -38,7 +39,7 @@ const PreviewCard = ({author, title, cover, updatedAt}) => {
             </CardContent>
             <Divider variant='middle' />
             <CardActions>
-                <Button variant='outlined' fullWidth>مطالعه بیشتر</Button>
+                <Button variant='outlined' fullWidth onClick={()=> navigate(`/posts/${slug}`)}>مطالعه بیشتر</Button>
             </CardActions>
             
         </Card>

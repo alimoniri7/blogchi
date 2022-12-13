@@ -1,8 +1,7 @@
 import React from 'react';
 import PreviewCard from './shared/PreviewCard';
-import Layout from './layout';
 import { useQuery } from '@apollo/client';
-import { GET_AUTHOR_PREVIEW, GET_CARD_INFO } from './../services/GraphQL/gqls';
+import { GET_AUTHOR_PREVIEW, GET_CARD_INFO } from '../GraphQL/gqls';
 import LoadinCard from './shared/LoadinCard';
 import { Container } from '@mui/system';
 import { Alert, AlertTitle, Divider, Grid, List, ListSubheader, Typography } from '@mui/material';
@@ -16,7 +15,7 @@ const HomePage = () => {
     console.log({loading, data});
 
     return (
-        <Layout>
+        <>
             <Container maxWidth='xl' sx={{marginTop:'100px'}}>
                 <Grid container spacing={3}>
                     {error?
@@ -45,17 +44,17 @@ const HomePage = () => {
                                     >
                                         {authorsRes.loading?
                                             <>
-                                             {[0,1,2,3].map(item=> <AuthorItemLoading key={item}/>) }
+                                             {[10,20,30,40].map(item=> <AuthorItemLoading key={item}/>) }
                                             </>
                                         :
                                             <>
                                                 {authorsRes.data.authors.map((post, index)=>
-                                                    <>
+                                                    <React.Fragment key={post.id} >
                                                         <AuthorItem name={post.name} avatarURL={post.avatar.url}/>
                                                         {
                                                             index!== authorsRes.data.authors.length-1 && <Divider variant='middle' />
                                                         }
-                                                    </>
+                                                    </React.Fragment>
                                                 )}
                                             </>
                                         } 
@@ -75,7 +74,7 @@ const HomePage = () => {
                                     </Grid>
                                     {data.posts.map(post=> 
                                         <Grid item  xs={12} lg={4} sm={6} key={post.id} >
-                                            <PreviewCard author={post.author} title={post.title} cover={post.cover} updatedAt={post.updatedAt} />
+                                            <PreviewCard author={post.author} title={post.title} cover={post.cover} updatedAt={post.updatedAt} slug={post.slug} />
                                         </Grid>
                                     )}
                                 </Grid>
@@ -85,7 +84,7 @@ const HomePage = () => {
                     }
                 </Grid>
             </Container>
-        </Layout>
+        </>
     );
 };
 

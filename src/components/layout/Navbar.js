@@ -1,16 +1,18 @@
 import React from 'react';
-import { AppBar, Container, Toolbar, Typography, Box, Button, IconButton, Menu, MenuItem, Tooltip, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { AppBar, Container, Toolbar, Typography, Box, Button, IconButton, Menu, MenuItem, Tooltip, } from '@mui/material';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuIcon from '@mui/icons-material/Menu';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
-import HomeIcon from '@mui/icons-material/Home';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { styled } from '@mui/material/styles';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import { Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+// import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+// import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
+// import HomeIcon from '@mui/icons-material/Home';
+// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+// import { styled } from '@mui/material/styles';
 
 const Navbar = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    // const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const pages= ['صفحه اصلی', 'پست ها' , 'نویسنده ها']
     const settings= ['داشبورد']
@@ -22,21 +24,21 @@ const Navbar = () => {
       setAnchorElUser(null);
     };
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-      };
-      const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-      };
+    // const handleOpenNavMenu = (event) => {
+    //     setAnchorElNav(event.currentTarget);
+    //   };
+    //   const handleCloseNavMenu = () => {
+    //     setAnchorElNav(null);
+    //   };
 
-      const DrawerHeader = styled('div')(({ theme }) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-      }));
+    //   const DrawerHeader = styled('div')(({ theme }) => ({
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     padding: theme.spacing(0, 1),
+    //     // necessary for content to be below app bar
+    //     ...theme.mixins.toolbar,
+    //     justifyContent: 'flex-end',
+    //   }));
 
 
 
@@ -55,7 +57,7 @@ const Navbar = () => {
                             </Button>
                         ))}
                     </Box>
-                    <IconButton
+                    {/* <IconButton
                     size="large"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
@@ -66,9 +68,9 @@ const Navbar = () => {
                     
                     >
                         <MenuIcon />
-                    </IconButton>
+                    </IconButton> */}
 
-                    <Drawer
+                    {/* <Drawer
                         variant="temporary"
                         anchor="right"
                         open={anchorElNav}
@@ -106,7 +108,7 @@ const Navbar = () => {
                                 </ListItemButton>
                             </ListItem>
                         </List>
-                    </Drawer>
+                    </Drawer> */}
                     
                     <Box
                     sx={{
