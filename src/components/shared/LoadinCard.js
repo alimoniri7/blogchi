@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, Skeleton } from '@mui/material';
 
 
-const LoadinCard = () => {
+const LoadingCard = () => {
     return (
         <Card sx={{maxWidth : '375px'}} >
             <CardHeader
@@ -28,4 +28,4 @@ const LoadinCard = () => {
     );
 };
 
-export default LoadinCard;
+export default LoadingCard;

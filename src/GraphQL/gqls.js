@@ -39,17 +39,20 @@ const GET_POST_DATA = gql`
     query getPostData($slug: String!) {
         post(where: {slug: $slug}) {
             author {
-            avatar {
-                url
-            }
+                avatar {
+                    url
+                }
+                name
+                slug
             }
             content {
-            html
+                html
             }
             cover {
-            url
+                url
             }
             updatedAt
+            title
         }
     }
 `

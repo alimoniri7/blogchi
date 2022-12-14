@@ -29,7 +29,7 @@
     font-family: 'Yekan Bakh';
     src: url('YekanBakh-Regular.eot');
     src: local('YekanBakh-Regular'), url('YekanBakh-Regular.eot?#iefix') format('embedded-opentype'), url('YekanBakh-Regular.woff2') format('woff2'), url('YekanBakh-Regular.woff') format('woff'), url('YekanBakh-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
@@ -38,7 +38,7 @@
     font-family: 'Yekan Bakh';
     src: url('YekanBakh-Medium.eot');
     src: local('YekanBakh-Medium'), url('YekanBakh-Medium.eot?#iefix') format('embedded-opentype'), url('YekanBakh-Medium.woff2') format('woff2'), url('YekanBakh-Medium.woff') format('woff'), url('YekanBakh-Medium.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
@@ -73,4 +73,8 @@
 @font-face {
     font-family: 'Galey';
     src: url('./Galey-Semi-Bold.ttf');
+}
+
+* {
+    font-family: 'Yekan Bakh';
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PreviewCard from './shared/PreviewCard';
 import { useQuery } from '@apollo/client';
 import { GET_AUTHOR_PREVIEW, GET_CARD_INFO } from '../GraphQL/gqls';
-import LoadinCard from './shared/LoadinCard';
+import LoadingCard from './shared/LoadinCard';
 import { Container } from '@mui/system';
 import { Alert, AlertTitle, Divider, Grid, List, ListSubheader, Typography } from '@mui/material';
 import AuthorItem from './shared/AuthorItem';
@@ -64,7 +64,7 @@ const HomePage = () => {
                             <Grid item xs={12} md={9}>
                                 {loading?
                                     <Grid container  spacing={3}>
-                                        {[0,1,2,3,4,5].map(item=> <Grid item xs={12} lg={4} sm={6} key={item}><LoadinCard/></Grid>)}
+                                        {[0,1,2,3,4,5].map(item=> <Grid item xs={12} lg={4} sm={6} key={item}><LoadingCard/></Grid>)}
                                     </Grid>
                                 :
                                 <Grid container spacing={3}>
