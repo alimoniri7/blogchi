@@ -31,6 +31,6 @@ function solarDateConvertor(gy, gm, gd) {
     if(jm===10) jm='دی'
     if(jm===11) jm='بهمن'
     if(jm===12) jm='اسفند'
-    return [jd + '  ' + jm + '  ' + jy];
+    return [jd + '\xa0\xa0' + jm + '\xa0\xa0' + jy];
 }
 export default solarDateConvertor

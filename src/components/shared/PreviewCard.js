@@ -5,13 +5,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {red} from '@mui/material/colors'
 import solarDateConvertor from '../../tools/solarDateConverter';
 import dateSeprator from '../../tools/dateSeprator';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const PreviewCard = ({author, title, cover, updatedAt, slug}) => {
     const navigate= useNavigate()
 
     return (
         <Card sx={{maxWidth : '600px', borderRadius: '10px', boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
+            <Link style={{textDecoration: 'none', color:'inherit'}} to={`/authors/${author.slug}`} >
             <CardHeader
                 avatar={
                     cover.url?
@@ -28,6 +29,7 @@ const PreviewCard = ({author, title, cover, updatedAt, slug}) => {
                 subheader={solarDateConvertor(...dateSeprator(updatedAt))}
                 
             />
+            </Link>
             <CardMedia
                 component='img'
                 height='194'

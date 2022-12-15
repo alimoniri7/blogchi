@@ -6,9 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { GET_POST_DATA } from '../GraphQL/gqls';
 import dateSeprator from '../tools/dateSeprator';
 import solarDateConvertor from '../tools/solarDateConverter';
-import LoadingCard from './shared/LoadinCard';
 import sanitizeHtml from 'sanitize-html';
-import './PostPage.scss'
+import './htmlFetchedContent.scss'
+import PostPageLoading from './PostPageLoading';
 
 
 const PostPage = () => {
@@ -42,9 +42,7 @@ const PostPage = () => {
             :
                 <>
                     {loading?
-                        <Grid container  spacing={3}>
-                            {[0,1,2,3,4,5].map(item=> <Grid item xs={12} lg={4} sm={6} key={item}><LoadingCard/></Grid>)}
-                        </Grid>
+                    <PostPageLoading/>
                     :
                     <>
                         <Grid container sx={{py:4,px:2, borderRadius:{xs:'10px', md:'30px'}, boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}} >
@@ -79,7 +77,7 @@ const PostPage = () => {
                                 dangerouslySetInnerHTML={{
                                     __html:sanitizeHtml(data.post.content.html)
                                 }}
-                                className='postContent'
+                                className='htmlContent'
                                 ></div>
                             </Grid>
                         </Grid>

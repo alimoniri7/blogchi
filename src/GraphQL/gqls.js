@@ -4,14 +4,14 @@ const GET_CARD_INFO = gql`
     query getCardInfo {
         posts {
             author {
-            avatar {
-                url
-            }
-            name
-            slug
+                avatar {
+                    url
+                }
+                name
+                slug
             }
             cover {
-            url
+                url
             }
             title
             updatedAt
@@ -25,12 +25,11 @@ const GET_AUTHOR_PREVIEW = gql`
     query getAuthorPreview {
         authors {
             slug
-            id
             name
             avatar {
-            url
+                url
             }
-            profession
+            id
         }
     }
 `
@@ -57,4 +56,20 @@ const GET_POST_DATA = gql`
     }
 `
 
-export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA }
+const GET_AHTHOR_DETAILS = gql`
+    query getAuthorDetails($slug: String!) {
+        author(where: {slug: $slug}) {
+            biography {
+                html
+            }
+            avatar {
+                url
+            }
+            createdAt
+            name
+            profession
+        }
+    }
+`
+
+export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA, GET_AHTHOR_DETAILS }

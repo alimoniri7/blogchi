@@ -50,7 +50,7 @@ const HomePage = () => {
                                             <>
                                                 {authorsRes.data.authors.map((post, index)=>
                                                     <React.Fragment key={post.id} >
-                                                        <AuthorItem name={post.name} avatarURL={post.avatar.url}/>
+                                                        <AuthorItem name={post.name} avatarURL={post.avatar.url} slug={post.slug}/>
                                                         {
                                                             index!== authorsRes.data.authors.length-1 && <Divider variant='middle' />
                                                         }
