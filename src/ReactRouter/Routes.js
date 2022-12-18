@@ -7,7 +7,7 @@ import PostPage from "../components/PostPage";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Layout/>,
+        element: <Layout></Layout>,
         children: [
             {
                 path: '/',

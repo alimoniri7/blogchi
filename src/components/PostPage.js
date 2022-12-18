@@ -21,14 +21,7 @@ const PostPage = () => {
         }
     })
     console.log({loading, data, error });
-    
-    useEffect(()=>{
-        window.scroll({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-          });
-    }, [])
+        
 
 
 

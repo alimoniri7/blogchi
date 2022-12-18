@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Divider, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import PostPageLoading from './PostPageLoading';
 import ShowError from './shared/ShowError';
 import sanitizeHtml from 'sanitize-html';
 import './htmlFetchedContent.scss'
+import AuthorPostsSection from './shared/AuthorPostsSection';
 
 
 
@@ -44,6 +45,14 @@ const AuthorDetailPage = () => {
                 >
   
                 </div>
+            </Box>
+            <Divider variant='fullWidth'/>
+            <Divider variant='fullWidth'/>
+            <Divider variant='fullWidth'/>
+            <Divider variant='fullWidth'/>
+            
+            <Box mt={4} >
+                <AuthorPostsSection authorSlug={authorSlug} />
             </Box>
         </Container>
     );

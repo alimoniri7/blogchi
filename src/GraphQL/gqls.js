@@ -34,6 +34,20 @@ const GET_AUTHOR_PREVIEW = gql`
     }
 `
 
+const GET_AUTHOR_POSTS_PREVIEW = gql`
+    query getAuthorPostsPreview($slug: String!) {
+        author(where: {slug: $slug}) {
+            posts {
+            title
+            cover {
+                url
+            }
+            slug
+            }
+        }
+    }
+`
+
 const GET_POST_DATA = gql`
     query getPostData($slug: String!) {
         post(where: {slug: $slug}) {
@@ -72,4 +86,4 @@ const GET_AHTHOR_DETAILS = gql`
     }
 `
 
-export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA, GET_AHTHOR_DETAILS }
+export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA, GET_AHTHOR_DETAILS, GET_AUTHOR_POSTS_PREVIEW }
