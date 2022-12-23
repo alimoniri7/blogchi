@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Container, Toolbar, Typography, Box, Button, IconButton, Menu, MenuItem, Tooltip, } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
 // import MenuIcon from '@mui/icons-material/Menu';
 // import { Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 // import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
@@ -46,7 +47,7 @@ const Navbar = () => {
         <AppBar color='BurntOrange' >
             <Container maxWidth='xl' >
                 <Toolbar disableGutters>
-                    <Typography variant='h4' component='p' fontFamily='Galey' fontWeight={900} color='white' sx={{display: { xs: 'none', md: 'flex' }}} >BlogChi</Typography>
+                    <Typography variant='h4' component='p' fontFamily='Galey' fontWeight={900} color='white' sx={{display: { xs: 'none', md: 'flex' }}} ><Link to='/' style={{textDecoration: 'none', color: 'inherit',fontFamily: 'inherit', fontWeight: 'inherit'}}>BlogChi</Link></Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, mx:3 }}>
                         {pages.map((page) => (
                             <Button
@@ -116,7 +117,7 @@ const Navbar = () => {
                     flexGrow: 1,              
                     }}
                     >
-                        <Typography mx='auto' variant='h4'  fontFamily='Galey' fontWeight={900} color="white" >BlogChi</Typography>
+                        <Typography mx='auto' variant='h4'  fontFamily='Galey' fontWeight={900} color="white" ><Link to='/' style={{textDecoration: 'none', color: 'inherit',fontFamily: 'inherit', fontWeight: 'inherit'}}>BlogChi</Link></Typography>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">

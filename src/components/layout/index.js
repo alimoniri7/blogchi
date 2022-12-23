@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import ScrollToTop from '../shared/ScrollToTop';
 import Navbar from './Navbar';
 
-const Layout = ({children}) => {
+const Layout = () => {
     return (
         <>
             <ScrollToTop/>

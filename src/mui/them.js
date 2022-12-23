@@ -11,7 +11,8 @@ const theme= createTheme({
             main: '#E35A01'
         },
         NavyBlue:{
-            main: '#2E4769'
+            main: '#2E4769',
+            contrastText: '#fff'
         },
         ForestGreen:{
             main: '#4C7C71'

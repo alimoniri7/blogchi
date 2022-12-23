@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { Container, Grid, Alert, AlertTitle, Typography, Card, CardHeader, Avatar, Button } from '@mui/material';
 import { red } from '@mui/material/colors';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GET_POST_DATA } from '../GraphQL/gqls';
 import dateSeprator from '../tools/dateSeprator';
@@ -9,6 +9,8 @@ import solarDateConvertor from '../tools/solarDateConverter';
 import sanitizeHtml from 'sanitize-html';
 import './htmlFetchedContent.scss'
 import PostPageLoading from './PostPageLoading';
+import { Box } from '@mui/system';
+import CommentSection from './shared/commentSection/CommentForm';
 
 
 const PostPage = () => {
@@ -20,8 +22,8 @@ const PostPage = () => {
             slug: postSlug 
         }
     })
-    console.log({loading, data, error });
-        
+    // console.log({loading, data, error });
+
 
 
 
@@ -63,7 +65,7 @@ const PostPage = () => {
                                 </Card>
                             </Grid>
                             <Grid item xs={12} width='100%' display='flex' justifyContent='center' >
-                                <img src={data.post.cover.url} alt="cover" style={{maxWidth: '90%' , height: 'auto', minWidth: '50%'}} />
+                                <img src={data.post.cover.url} alt="cover" loading='lazy' style={{maxWidth: '90%' , height: 'auto', minWidth: '50%'}} />
                             </Grid>
                             <Grid item xs={12}>
                                 <div
@@ -74,6 +76,11 @@ const PostPage = () => {
                                 ></div>
                             </Grid>
                         </Grid>
+                        
+                        {/* comment section ---------------------------------------------------- */}
+                        <Box sx={{py:4,px:{xs:2, md: 6},mt:3, borderRadius:{xs:'10px', md:'30px'}, boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}}>
+                            <CommentSection/>
+                        </Box >
                     </>
                     }
                 </>

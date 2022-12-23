@@ -115,11 +115,11 @@ const AuthorPostsSection = ({authorSlug}) => {
     return (
         <Box  >
            <Typography variant='h6' fontWeight={800} padding={1} >مقاله های این نویسنده</Typography> 
-           <Box boxShadow='0px 3px 7px #a9a9a9 inset;' pb={4} pt={2} borderRadius={1} >
+           <Box boxShadow='0px 3px 7px #a9a9a9 inset;' bgcolor='#f4f4f4' pb={4} pt={2} borderRadius={1} >
             <Slider {...settings} >
                   {
                       data.author.posts.map(post=>
-                          <PreviewCard withoutHeader maxWidth='270px' title={post.title} slug={post.slug} cover={post.cover}  />
+                          <PreviewCard withoutHeader key={post.slug} maxWidth='270px' title={post.title} slug={post.slug} cover={post.cover}  />
                       )
                   }
             </Slider>
