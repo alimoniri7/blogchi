@@ -79,7 +79,7 @@ const PostPage = () => {
                         
                         {/* comment section ---------------------------------------------------- */}
                         <Box sx={{py:4,px:{xs:2, md: 6},mt:3, borderRadius:{xs:'10px', md:'30px'}, boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;'}}>
-                            <CommentSection/>
+                            <CommentSection postSlug={postSlug} />
                         </Box >
                     </>
                     }

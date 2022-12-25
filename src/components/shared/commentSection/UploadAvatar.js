@@ -1,13 +1,16 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { Avatar, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField, Typography } from '@mui/material';
+import { Avatar, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import PanoramaIcon from '@mui/icons-material/Panorama';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Box } from '@mui/system';
+import { useMutation } from '@apollo/client';
+import { PUBLISH_AVATAR } from '../../../GraphQL/gqls';
 
+// dropzone component
 const DndBox = ({dragStatus, uploadedFile})=>{
   return(
     <Box
@@ -49,7 +52,8 @@ const DndBox = ({dragStatus, uploadedFile})=>{
   )
 }
 
-const UploadAvatar= ()=> {
+// Main component -------------------------------------------------------------------------
+const UploadAvatar= ({setAvatarId})=> {
 
   const [files, setFiles] = useState([]);
   const [uploadedFile, setUploadedFile] = useState({
@@ -59,8 +63,21 @@ const UploadAvatar= ()=> {
   })
   console.log(uploadedFile);
   
+  // send data of uploaded file to parent component
+  useEffect(()=>{
+    if (uploadedFile.data) setAvatarId(uploadedFile.data.id)
+  }, [uploadedFile.data])
+
+  // publish uploaded file
+  const [publishAvatar] = useMutation(PUBLISH_AVATAR,{
+    variables: {id: uploadedFile.data && uploadedFile.data.id}
+  })
+  useEffect(()=>{
+    if(uploadedFile.data) publishAvatar()
+  }, [uploadedFile.data])
 
 
+  // fetch file ...
   useEffect(
     () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
@@ -149,7 +166,7 @@ const UploadAvatar= ()=> {
         {uploadedFile.data?
           <Avatar src={uploadedFile.data.url} sx={{width:'100px' , height: '100px'}} />
         :
-        <Button sx={{display: 'flex', alignItems: 'center' , gap:1,padding:0, width:'100px', height: '100px' , borderRadius:'1000px', flexDirection:'column'}}  variant='contained' color='NavyBlue' onClick={handleClickOpen}>
+        <Button sx={{display: 'flex', alignItems: 'center' , gap:1,padding:0, width:'100px', height: '100px' , borderRadius:'1000px', flexDirection:'column'}}  variant='contained' color='ForestGreen' onClick={handleClickOpen}>
           <Typography color='white' fontSize={14}>ارسال عکس</Typography>
           <AddAPhotoIcon fontSize='small' color="white"  sx={{color: 'white'}} />
         </Button>
@@ -174,34 +191,6 @@ const UploadAvatar= ()=> {
         </DialogActions>
       </Dialog>
     </div>
-
-
-
-
-
-
-
-    // <>
-    //   <div {...getRootProps()}>
-    //     <input {...getInputProps()} />
-    //     {
-    //       isDragActive ?
-    //         <p>Drop the files here ...</p> :
-    //         <p>Drag 'n' drop some files here, or click to select files</p>
-    //     }
-    //   </div>
-    //   <div>
-    //     {uploadedFile.error? <h2>Something went wrong</h2>
-    //     :
-    //       <>
-    //         {uploadedFile.loading? <h2>Loading</h2>
-    //         :
-    //         <>{uploadedFile.data && <h1>{uploadedFile.data.id}</h1>}</>
-    //         }
-    //       </>
-    //     }
-    //   </div>
-    // </>
   )
 }
 

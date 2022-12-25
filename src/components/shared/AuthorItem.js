@@ -12,7 +12,7 @@ const AuthorItem = ({name, avatarURL, slug}) => {
                         <Avatar alt={name} src={avatarURL} sx={{marginLeft: '10px'}} />
                     </ListItemAvatar>
                     <ListItemText sx={{display:'flex'}}>
-                        <Typography variant='body2' component='p' >{name}</Typography>
+                        <Typography variant='body2' component='p' color='text.NavyBlue' >{name}</Typography>
                     </ListItemText>
                 </Button>
             </ListItem>

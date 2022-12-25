@@ -43,7 +43,7 @@ const PreviewCard = ({author, title, cover, updatedAt, slug, withoutHeader=false
             </CardContent>
             <Divider variant='middle' />
             <CardActions>
-                <Button variant='outlined' fullWidth onClick={()=> navigate(`/posts/${slug}`)}>مطالعه بیشتر</Button>
+                <Button variant='contained' color='NavyBlue' fullWidth onClick={()=> navigate(`/posts/${slug}`)}>مطالعه بیشتر</Button>
             </CardActions>
             
         </Card>

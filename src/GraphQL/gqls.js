@@ -86,4 +86,41 @@ const GET_AHTHOR_DETAILS = gql`
     }
 `
 
-export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA, GET_AHTHOR_DETAILS, GET_AUTHOR_POSTS_PREVIEW }
+const POST_COMMENT = gql`
+    mutation MyMutation($description: String! , $email: String! , $fullName: String! , $rate: Float! , $avatar: AssetCreateOneInlineInput = null , $postSlug: String! ) {
+        createComment(
+            data: {
+                fullName: $fullName,
+                email: $email,
+                rate: $rate, 
+                description: $description,
+                avatar: $avatar,
+                post: {connect: {slug: $postSlug}}
+            }
+        ) 
+        {
+            id
+        }
+    }
+`
+
+const PUBLISH_COMMENT = gql`
+    mutation MyMutation($id: ID!) {
+        publishComment(where: {id: $id}, to: PUBLISHED)
+        {
+            id
+        }
+    }
+`
+
+const PUBLISH_AVATAR =gql`
+    mutation MyMutation($id: ID!) {
+        publishAsset(where: {id: $id}, to: PUBLISHED)
+        {
+            id
+        }
+    }
+
+`
+
+export { GET_CARD_INFO, GET_AUTHOR_PREVIEW, GET_POST_DATA, GET_AHTHOR_DETAILS, GET_AUTHOR_POSTS_PREVIEW , POST_COMMENT , PUBLISH_COMMENT, PUBLISH_AVATAR}

@@ -19,7 +19,12 @@ const theme= createTheme({
         },
         DarkBlue:{
             main: '#1F262E'
-        }
+        },
+        text: {
+            NavyBlue: '#2E4769',
+            ForestGreen: '#4C7C71'
+        },
+        divider: '#4c7c714f'
     }
 })
 

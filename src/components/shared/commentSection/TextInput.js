@@ -7,10 +7,10 @@ const TextInput = ({label, placeholder,value,onChange,onBlur,errorMessage,type, 
 
     return (
         <Grid container>
-            <Grid item xs={2} md={1} display='flex' alignItems='center'>
-                <Typography variant='body1' component='label' pb={2}>{label}: </Typography>
+            <Grid item xs={12} md={1.5} display='flex' alignItems='center'>
+                <Typography variant='body1' component='label' pb={{xs:0 , md:2}}>{label}: </Typography>
             </Grid>
-            <Grid item xs={10} md={11}>
+            <Grid item xs={12} md={10.5}>
                 <TextField
                 {...other}
                 hiddenLabel
