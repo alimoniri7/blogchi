@@ -8,7 +8,7 @@ const useInputHandler = (defaultValue='') => {
     }
     
 
-    return [value , inputHandler]
+    return [value , inputHandler, setValue]
 };
 
 export default useInputHandler;

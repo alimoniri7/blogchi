@@ -34,7 +34,7 @@ const DndBox = ({dragStatus, uploadedFile})=>{
     :uploadedFile.loading?
       <>
         <CircularProgress color="warning" size={70} />
-        <Typography color='white' textAlign='center' >لطفا چند لحظه صبر کنید ...</Typography>
+        <Typography color='white' textAlign='center' >{uploadedFile.data ? 'در حال انتشار تصویر' : 'در حال ارسال تصویر، لصفا صبر کنید'}</Typography>
       </>
     :uploadedFile.data?
       <>
@@ -59,7 +59,8 @@ const UploadAvatar= ({setAvatarId})=> {
   const [uploadedFile, setUploadedFile] = useState({
     error: false,
     data: null,
-    loading: false
+    loading: false,
+    published: false
   })
   console.log(uploadedFile);
   
@@ -69,12 +70,31 @@ const UploadAvatar= ({setAvatarId})=> {
   }, [uploadedFile.data])
 
   // publish uploaded file
-  const [publishAvatar] = useMutation(PUBLISH_AVATAR,{
+  const [publishAvatar, publishRes] = useMutation(PUBLISH_AVATAR,{
     variables: {id: uploadedFile.data && uploadedFile.data.id}
   })
   useEffect(()=>{
     if(uploadedFile.data) publishAvatar()
   }, [uploadedFile.data])
+  console.log(publishRes);
+
+  useEffect(()=>{
+    if(publishRes.data){
+      setUploadedFile(prev=>({
+        ...prev,
+        loading: false,
+        error: false,
+        published: true
+      }))
+    } else if(publishRes.error){
+      setUploadedFile(prev=>({
+        ...prev,
+        loading: false,
+        error: true,
+        published: false
+      }))
+    }
+  }, [publishRes.data, publishRes.error])
 
 
   // fetch file ...
@@ -115,7 +135,7 @@ const UploadAvatar= ({setAvatarId})=> {
         setUploadedFile({
           error: false,
           data: {...data},
-          loading: false
+          loading: true
         })
       })
       .catch((err) => {
@@ -163,7 +183,7 @@ const UploadAvatar= ({setAvatarId})=> {
     <div>
       <Box display='flex' gap={2} alignItems='center'>
         <Typography>آواتار :</Typography>
-        {uploadedFile.data?
+        {uploadedFile.data && !uploadedFile.error?
           <Avatar src={uploadedFile.data.url} sx={{width:'100px' , height: '100px'}} />
         :
         <Button sx={{display: 'flex', alignItems: 'center' , gap:1,padding:0, width:'100px', height: '100px' , borderRadius:'1000px', flexDirection:'column'}}  variant='contained' color='ForestGreen' onClick={handleClickOpen}>

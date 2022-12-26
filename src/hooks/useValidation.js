@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const useValidation = (value , regex='[^]*', message='') =>{
+const useValidation = (value , regex='[^]*', message='*') =>{
     const [status , setStatus] = useState({
-        valid: true,
+        valid: false,
         message: ''
     })
 
