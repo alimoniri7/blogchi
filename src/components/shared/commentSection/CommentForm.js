@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Grid, Rating, Typography } from '@mui/material';
+import { Button, Divider, Grid, Rating, Typography } from '@mui/material';
 import useInputHandler from '../../../hooks/useInputHandler';
 import useValidation from '../../../hooks/useValidation';
 import UploadAvatar from './UploadAvatar';
@@ -57,7 +57,9 @@ const CommentForm = ({postSlug}) => {
             commentValdator()
             rateValidator()
             setActive(prev=>({
-                ...prev,
+                name: true,
+                email: true,
+                comment: true,
                 rate: true
             }))
         }
@@ -136,21 +138,29 @@ const CommentForm = ({postSlug}) => {
                 called: true,
                 done: true
             })
-            setName('')
-            setEmail('')
-            setAvatarId('')
-            setRate(0)
-            setComment('')
 
         }        
     }, [publishRes.data, publishRes.error])
 
 console.log([rateStatus.valid, active.rate]);
-    
+
+
+    if(mutationStatus.done) return (
+        <>
+        <Typography textAlign='center' variant='h5' color='success.main'>دیدگاه شما با موفقیت ثبت شد!</Typography>
+        <SendPopUp open={open} handleClose={handleClose} mutationStatus={mutationStatus} setMutationStatus={setMutationStatus} mutateForm={mutateForm} />
+
+        </>
+    )
+
     return (
         <Grid container spacing={{xs: 0 , md : 4}} >
+            <Grid item xs={12}>
+                <Typography variant='h5' mb={1} pr={2} fontWeight={800}>ثبت دیدگاه شما</Typography>
+                <Divider variant='inset'/>
+            </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} mt={{xs: 3, md: 0}}>
                 <TextInput
                  name='name'
                  value={name}
@@ -213,7 +223,7 @@ console.log([rateStatus.valid, active.rate]);
                   onFocus={focusHandler}
                   onBlur={commentValdator}
                   onKeyUp={commentValdator}
-                  error={commentStatus.valid || !active.name ? false : true}
+                  error={commentStatus.valid || !active.comment ? false : true}
                   color={commentStatus.valid? 'success' : 'warning'}
                   required
                   errorMessage={commentStatus.message}
