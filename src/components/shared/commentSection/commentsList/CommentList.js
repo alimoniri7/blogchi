@@ -1,6 +1,4 @@
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { Cache } from "@apollo/client/cache";
-import { cacheSlot } from "@apollo/client/cache";
 import {
   Box,
   Button,
@@ -20,12 +18,28 @@ import ShowError from "../../ShowError";
 import CommentItem from "./CommentItem";
 
 const CommentList = ({ postSlug }) => {
+  // state for number of comments load in every click
   const [skip, setSkip] = useState(0);
 
+  const [isMore, setIsMore] = useState(true);
+
+  const options = [
+    {
+      label: "جدید ترین",
+      value: "createdAt_DESC",
+    },
+    {
+      label: "قدیمی ترین",
+      value: "createdAt_ASC",
+    },
+    {
+      label: "مفید ترین",
+      value: "like_DESC",
+    },
+  ];
   const [sort, sortHandler] = useInputHandler("createdAt_DESC");
   const [comments, setComments] = useState([]);
 
-  // let comments= []
   const { loading, data, error } = useQuery(GET_POST_COMMENTS, {
     variables: {
       slug: postSlug,
@@ -46,66 +60,40 @@ const CommentList = ({ postSlug }) => {
   const loadMore = () => {
     setSkip((prev) => prev + 5);
     setStableSort(sort);
-    // getMoreComments()
   };
 
   useEffect(() => {
     if (skip) getMoreComments();
   }, [skip]);
-  // if (moreCommentsRes.data) comments.push(...moreCommentsRes.data.post.commentS)
 
-  console.log(moreCommentsRes);
-
-  // console.log({ data, loading, error });
-  // console.log(sort);
-
-  const options = [
-    {
-      label: "جدید ترین",
-      value: "createdAt_DESC",
-    },
-    {
-      label: "قدیمی ترین",
-      value: "createdAt_ASC",
-    },
-    {
-      label: "مفید ترین",
-      value: "like_DESC",
-    },
-  ];
-
+  // add new more comments to comments list
   let didMount = useRef(false);
   useEffect(() => {
     if (didMount.current) {
-      // if (moreCommentsRes.data) comments= comments.concat(moreCommentsRes.data.post.commentS)
-      if (moreCommentsRes.data && skip)
+      if (moreCommentsRes.data && skip) {
         setComments((prev) => [...prev, ...moreCommentsRes.data.post.commentS]);
-      console.log(moreCommentsRes.data);
+        if (moreCommentsRes.data.post.commentS.length < 5) setIsMore(false);
+      }
     } else {
       didMount.current = true;
     }
   }, [moreCommentsRes.data]);
 
-  // console.log(moreCommentsRes.data);
-
+  // add first comments to comments list and reset skip state
   useEffect(() => {
-    // if (didMount.current) {
     if (data) {
       setComments([...data.post.commentS]);
       setSkip(0);
+      if (data.post.commentS.length < 5) {
+        setIsMore(false);
+      } else setIsMore(true);
     }
-
-    // } else {
-    //   didMount.current = true;
-    // }
   }, [data]);
 
   if (error) return <ShowError error="یه اتفاق بدی افتاده" />;
   if (loading) return <CircularProgress color="success" />;
 
   const { commentS } = data.post;
-  console.log(comments);
-
   if (commentS.length === 0) return <p>هیچ دیدگاهی ثبت نشده است</p>;
 
   return (
@@ -138,16 +126,39 @@ const CommentList = ({ postSlug }) => {
         </Select>
       </FormControl>
       <List sx={{ width: "100%" }}>
-        {comments.map((comment, index) => (
+        {comments.map((comment) => (
           <React.Fragment key={comment.id}>
             <CommentItem comment={comment} />
-            {index < commentS.length - 1 && (
-              <Divider variant="middle" sx={{ my: 2 }} />
-            )}
+
+            <Divider variant="middle" sx={{ my: 2 }} />
           </React.Fragment>
         ))}
       </List>
-      <Button onClick={loadMore}>بیشتر</Button>
+
+      <Box
+        sx={
+          !moreCommentsRes.loading
+            ? {
+                background:
+                  "linear-gradient(0deg, rgba(164,197,237,1) 0%, rgba(255,255,255,0.6979166666666667) 92%)",
+              }
+            : {}
+        }
+        display={isMore ? "flex" : "none"}
+      >
+        {moreCommentsRes.loading ? (
+          <CircularProgress sx={{ mx: "auto" }} color="warning" />
+        ) : (
+          <Button
+            fullWidth
+            sx={{ color: "NavyBlue.main", fontWeight: "800" }}
+            onClick={loadMore}
+            disabled={moreCommentsRes.loading ? true : false}
+          >
+            نمایش بیشتر
+          </Button>
+        )}
+      </Box>
     </>
   );
 };
