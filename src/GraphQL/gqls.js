@@ -87,10 +87,12 @@ const GET_AHTHOR_DETAILS = gql`
   }
 `;
 
+// let a= 'like_DESC'
+
 const GET_POST_COMMENTS = gql`
-  query MyQuery($slug: String!) {
+  query MyQuery($slug: String! $orderBy: CommentOrderByInput! $skip: Int!) {
     post(where: { slug: $slug }) {
-      commentS( orderBy: publishedAt_DESC) {
+      commentS(first: 5 , orderBy: $orderBy , skip: $skip) {
         avatar {
           url
         }

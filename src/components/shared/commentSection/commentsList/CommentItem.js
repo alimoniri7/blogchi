@@ -18,7 +18,7 @@ const CommentItem = ({ comment }) => {
 
 
   const description= comment.description.replace(/\n/g, "<br />")
-  console.log(comment);
+  // console.log(comment);
 
   return (
     <>

@@ -22,7 +22,7 @@ const LikeButton = ({ commentId, like }) => {
         id:commentId
     }
   })
-  console.log(publishRes);
+  // console.log(publishRes);
 
   const likeHandler = () => {
     setIsLiked((prev) => !prev);
@@ -33,18 +33,18 @@ const LikeButton = ({ commentId, like }) => {
     }
   };
 
-  console.log(likeCount);
+  // console.log(likeCount);
 
   const isInitialMount = useRef(false);
 
   useEffect(() => {
     if (isInitialMount.current) {
-      console.log("Mutate");
+      // console.log("Mutate");
       mutateLike();
     } else {
       isInitialMount.current = true;
     }
-    console.log("hello");
+    // console.log("hello");
   }, [likeCount]);
 
   useEffect(()=>{
@@ -58,7 +58,7 @@ const LikeButton = ({ commentId, like }) => {
           <Typography color="text.secondary" variant="body2">
             {likeCount}
           </Typography>
-          {isLiked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+          {isLiked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon color="ForestGreen" />}
         </Button>
       </Tooltip>
     </Box>
