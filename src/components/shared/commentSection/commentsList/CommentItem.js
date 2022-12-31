@@ -4,15 +4,14 @@ import {
   Box,
   Button,
   IconButton,
-  List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Tooltip,
   Typography,
 } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
 import LikeButton from "./LikeButton";
+import ReplyButton from './ReplyButton'
 
 const CommentItem = ({ comment }) => {
 
@@ -61,11 +60,7 @@ const CommentItem = ({ comment }) => {
         </Box>
         <Box display="flex">
           <LikeButton like={comment.like} commentId={comment.id} />
-          <Tooltip title="پاسخ">
-            <IconButton aria-label="پاسخ">
-              <ReplyIcon />
-            </IconButton>
-          </Tooltip>
+          <ReplyButton commentId={comment.id}/>
         </Box>
       </Box>
       {/* <ListItem alignItems="flex-start" sx={{width: '100%'}}>

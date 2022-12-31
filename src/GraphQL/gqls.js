@@ -90,9 +90,9 @@ const GET_AHTHOR_DETAILS = gql`
 // let a= 'like_DESC'
 
 const GET_POST_COMMENTS = gql`
-  query MyQuery($slug: String! $orderBy: CommentOrderByInput! $skip: Int!) {
+  query MyQuery($slug: String!, $orderBy: CommentOrderByInput!, $skip: Int!) {
     post(where: { slug: $slug }) {
-      commentS(first: 5 , orderBy: $orderBy , skip: $skip) {
+      commentS(first: 5, orderBy: $orderBy, skip: $skip) {
         avatar {
           url
         }
@@ -161,7 +161,38 @@ const PUBLISH_AVATAR = gql`
 const LIKE_COMMENT = gql`
   mutation MyMutation($id: ID!, $likeCount: Float!) {
     updateComment(data: { like: $likeCount }, where: { id: $id }) {
-        id
+      id
+    }
+  }
+`;
+
+const POST_REPLY = gql`
+  mutation MyMutation(
+    $description: String!
+    $email: String!
+    $fullName: String!
+    $commentId: ID!
+    $avatar: AssetCreateOneInlineInput = null
+  ) {
+    createReply(
+      data: {
+        description: $description
+        email: $email
+        like: 0
+        fullName: $fullName
+        comment: { connect: { id: $commentId } }
+        avatar: $avatar
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+const PUBLISH_REPLY = gql`
+  mutation MyMutation($id: ID!) {
+    publishReply(where: { id: $id }, to: PUBLISHED) {
+      id
     }
   }
 `;
@@ -177,4 +208,6 @@ export {
   PUBLISH_COMMENT,
   PUBLISH_AVATAR,
   LIKE_COMMENT,
+  POST_REPLY,
+  PUBLISH_REPLY,
 };

@@ -5,14 +5,14 @@ import useValidation from '../../../hooks/useValidation';
 import UploadAvatar from './UploadAvatar';
 import TextInput from './TextInput';
 import { useMutation } from '@apollo/client';
-import { POST_COMMENT, PUBLISH_COMMENT } from '../../../GraphQL/gqls';
+import { POST_COMMENT, POST_REPLY, PUBLISH_COMMENT, PUBLISH_REPLY } from '../../../GraphQL/gqls';
 import SendPopUp from './SendPopUp';
 
-const CommentForm = ({postSlug}) => {
+const CommentForm = ({postSlug, replyForm, commentId, closeReplyPopup}) => {
     const [active, setActive] = useState({
         name: false,
         email: false,
-        rate: false,
+        rate:  replyForm ? undefined : false,
         comment: false
     })
     const focusHandler = (e)=>{
@@ -49,8 +49,22 @@ const CommentForm = ({postSlug}) => {
 
     const handleClickOpen = () => {
         
-        if(nameStatus.valid && emailStatus.valid && commentStatus.valid && rateStatus.valid){
-            setOpen(true);
+        if(nameStatus.valid && emailStatus.valid && commentStatus.valid){
+            if(replyForm){
+                setOpen(true)
+            }
+            if(rateStatus){
+                setOpen(true)
+            }else{
+                rateValidator()
+                setActive(prev=>({
+                    name: true,
+                    email: true,
+                    comment: true,
+                    rate: replyForm ? undefined : true
+                }))
+            }
+            // setOpen(true);
         }else{
             nameValidator()
             emailValidator()
@@ -60,7 +74,7 @@ const CommentForm = ({postSlug}) => {
                 name: true,
                 email: true,
                 comment: true,
-                rate: true
+                rate: replyForm ? undefined : true
             }))
         }
     }; 
@@ -74,21 +88,30 @@ const CommentForm = ({postSlug}) => {
     };
 
     // Form Mutation 
-    const [mutateForm, formResponse] = useMutation(POST_COMMENT, {
+    const [mutateForm, formResponse] = useMutation(replyForm ? POST_REPLY : POST_COMMENT, {
         variables: {
             fullName: name,
             email: email,
-            rate: Number(rate),
+            rate: replyForm ? undefined : Number(rate),
             description: comment,
             avatar: avatarId ? {connect: {id: String(avatarId)}} : null,
-            postSlug: postSlug
+            postSlug: replyForm ? undefined : postSlug,
+            commentId: replyForm ? commentId : undefined
 
         }
     })
 
+    console.log({name, email, comment, avatarId, commentId});
 
-    const [publishComment, publishRes] = useMutation(PUBLISH_COMMENT, {
-        variables: {id: formResponse.data && formResponse.data.createComment.id}
+    let resName = ()=>{ if(formResponse.data){
+        if(replyForm){
+            return formResponse.data.createReply.id
+        }else{
+            return formResponse.data.createComment.id
+        }
+    }}
+    const [publishComment, publishRes] = useMutation( replyForm? PUBLISH_REPLY : PUBLISH_COMMENT, {
+        variables: {id: formResponse.data && resName()}
     })
 
     useEffect(()=>{
@@ -138,6 +161,9 @@ const CommentForm = ({postSlug}) => {
                 called: true,
                 done: true
             })
+            if(replyForm) setTimeout(() => {
+                closeReplyPopup()
+            }, 3000); 
 
         }        
     }, [publishRes.data, publishRes.error])
@@ -145,7 +171,7 @@ const CommentForm = ({postSlug}) => {
 console.log([rateStatus.valid, active.rate]);
 
 
-    if(mutationStatus.done) return (
+    if(mutationStatus.done && !replyForm) return (
         <>
         <Typography textAlign='center' variant='h5' color='success.main'>دیدگاه شما با موفقیت ثبت شد!</Typography>
         <SendPopUp open={open} handleClose={handleClose} mutationStatus={mutationStatus} setMutationStatus={setMutationStatus} mutateForm={mutateForm} />
@@ -155,12 +181,12 @@ console.log([rateStatus.valid, active.rate]);
 
     return (
         <Grid container spacing={{xs: 0 , md : 4}} >
-            <Grid item xs={12}>
+            { !replyForm && <Grid item xs={12}>
                 <Typography variant='h5' mb={1} pr={2} fontWeight={800}>ثبت دیدگاه شما</Typography>
                 <Divider variant='inset'/>
-            </Grid>
+            </Grid>}
 
-            <Grid item xs={12} md={6} mt={{xs: 3, md: 0}}>
+            <Grid item xs={12} md={!replyForm && 6} mt={{xs: 3, md: 0}}>
                 <TextInput
                  name='name'
                  value={name}
@@ -178,7 +204,7 @@ console.log([rateStatus.valid, active.rate]);
                 />
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={!replyForm && 6}>
                 <TextInput
                  name='email'
                  value={email}
@@ -197,11 +223,11 @@ console.log([rateStatus.valid, active.rate]);
                 />
             </Grid>
 
-            <Grid item xs={12} sm={6} mb={2} display='flex' justifyContent={{xs:'center', sm:'flex-start'}} >
+            <Grid item xs={12} sm={!replyForm && 6} mb={2} display='flex' justifyContent={{xs:'center', sm:'flex-start'}} >
                 <UploadAvatar setAvatarId={setAvatarId} />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            { !replyForm && <Grid item xs={12} sm={6}>
                 <Grid container>
                     <Grid item xs={12} height='2.5rem' display='flex' justifyContent={{xs:'center', sm:'flex-start'}} alignItems='center' gap={2} mt='auto'>
                         <Typography variant='body1' component='label' >امتیاز*: </Typography>
@@ -211,7 +237,7 @@ console.log([rateStatus.valid, active.rate]);
                         <Typography variant='body1' component='span' color='error' fontSize={13}>این فیلد الزامی است  </Typography>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid>}
 
             <Grid item xs={12}>
                 <TextInput 
