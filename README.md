@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# 👨🏼‍💻 About this project
+This is a weblog website with a lots of amazing features. follow me to read more about them <br/>
+Befor that, first see the [demo](http://blogchi.epizy.com) of this project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🧠 Features
+### :fire: Comment Form:
+- Users are able to write their personal comment about aech blog and after sending that, thier comment will save on data base so everyone can see that comment in the comments list section
+- Users are able to add their photo as an avatar for their comments
+  - Users can select their photo by drag and drop and also they can select it manually
+  - Users can see evary states in sending process
+- Users should rate the blog from 1 to 5 stars
+- The form will be validate after clicking the send button
 
-## Available Scripts
+### :fire: Comments List:
+- Commets list shows every comments that users send to the data base that include user's name, photo, rate, comment text
+- There is a like button for each comment that everyone can click on it if they liked the comment
+- Also there is a reply button that gives users the ability to replay each other comments
+  - By clicking on reply button you can see a comment form in a popup window, that have every features we discussed in the Comment Form feature
+- You can fetch and see replies for any comment by clicking the `show replies` button
+  - Also there is a `like` button form each reply
+- On mounting the page, react will show only 5 comments for a blog so you can fetch and see more comments by clicking `show more` button that you can see in the end of the commets list
+- Users are able to sort comments by "newest"(defualt) , "oldest", "most likes"
 
-In the project directory, you can run:
+### Commen Features:
+- In the home page you can see a list of blogs and writers
+- Every author has a unique page that they introduced themselves and also you can see list of that author's blogs in this page
+- View the optimal layout for the app depending on their device's screen size
+- You will see a preview for each page befor contents fully load
+- this is a single page application(SPA)
+- React-rouder used for routing between pages
 
-### `npm start`
+## 🛠️ tools & technologies
+- <img width="15px" src="https://skillicons.dev/icons?i=react" />  React JS
+- <img width="15px" src="https://skillicons.dev/icons?i=sass" />  Sass
+- <img width="15px" src="https://skillicons.dev/icons?i=graphql" />  Graph QL
+- <img width="15px" src="https://skillicons.dev/icons?i=apollo" />  Apollo client
+- <img width="15px" src="https://skillicons.dev/icons?i=materialui" />  Material UI
+  - Material icons
+- Hygraph (Graph CMS)
+- React dropzone
+- React router dom
+- React slick
+- Sanitize html
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Note: you can see online preview on [blogchi.epizy.com](http://blogchi.epizy.com)
