@@ -1,13 +1,14 @@
 # 👨🏼‍💻 About this project
 This is a weblog website with a lots of amazing features. follow me to read more about them <br/>
-Befor that, first see the [demo](http://blogchi.epizy.com) of this project
+Before that, first see the [demo](http://blogchi.epizy.com) of this project
 
 ## 🧠 Features
+I used hygraph(graph CMS) for the backend and graphQL api for fetch data, so in this website, clients will not receive any useless data
 ### :fire: Comment Form:
-- Users are able to write their personal comment about aech blog and after sending that, thier comment will save on data base so everyone can see that comment in the comments list section
+- Users are able to write their personal comment about each blog and after sending that, thier comment will save on Hygraph data base so everyone can see that comment in the comments list section
 - Users are able to add their photo as an avatar for their comments
   - Users can select their photo by drag and drop and also they can select it manually
-  - Users can see evary states in sending process
+  - Users can see every steps in sending process
 - Users should rate the blog from 1 to 5 stars
 - The form will be validate after clicking the send button
 
